@@ -1,0 +1,44 @@
+name: Pointcept Environment Testing
+
+on: [push]
+
+jobs:
+  build-windows:
+    name: Pointcept Environment for Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache Python environment
+        uses: actions/cache@v4
+        env:
+          # Increase this value to reset cache if environment.yml has not changed
+          CACHE_NUMBER: 2
+        with:
+          enableCrossOsArchive: true
+          path: D:\conda_pkgs_dir
+          key:
+            ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{
+            hashFiles('environment_win64.yml') }}
+      - uses: conda-incubator/setup-miniconda@v3.2.0
+        env:
+          CONDA_OVERRIDE_CUDA: 12.9
+        with:
+          python-version: 3.10.9
+          miniforge-version: latest
+          channels: conda-forge,nodefaults
+          channel-priority: true
+          activate-environment: pointcept
+          environment-file: environment_win64.yml
+          pkgs-dirs: D:\conda_pkgs_dir
+      - run: |
+          mamba list
+          mamba install conda-pack
+          conda pack -n pointcept -o pointcept-env.tar.gz
+          mkdir -p pointcept_env
+          tar -xzf pointcept-env.tar.gz -C pointcept_env
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pointcept-windows-environment
+          path: pointcept_env/
+          compression-level: 9
+
