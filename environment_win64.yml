@@ -154,7 +154,7 @@ dependencies:
   - libfreetype=2.13.3=h57928b3_1
   - libfreetype6=2.13.3=h0b5ce68_1
   - libgcc=15.1.0=h1383e82_3
-  - libglib=2.84.0=h7025463_0
+  - libglib
   - libgomp=15.1.0=h1383e82_3
   - libgrpc=1.71.0=h8c3449c_1
   - libheif=1.19.6=gpl_h2684147_100
