@@ -20,22 +20,12 @@ sources = [
     if file.endswith(".cpp") or file.endswith(".cu")
 ]
 
-# Conditionally set the conda_lib_path for Windows
-conda_lib_path = None
-if platform.system() == "Windows":
-    conda_lib_path = os.path.join(sys.prefix, 'Library', 'lib')
-    torch_lib_dir = os.path.join(os.path.dirname(torch.__file__), 'lib')
-
 # Define the CUDA extension
 cuda_extension = CUDAExtension(
     name="pointops._C",
     sources=sources,
-    extra_compile_args={"cxx": ["-g"], "nvcc": ["-O2", "-gencode=arch=compute_75,code=sm_75",]},
+    extra_compile_args={"cxx": ["-g"], "nvcc": ["-O2"]},
 )
-
-# If conda_lib_path is set, add it to the library_dirs
-if conda_lib_path:
-    cuda_extension.library_dirs = [conda_lib_path, torch_lib_dir]
 
 setup(
     name="pointops",
