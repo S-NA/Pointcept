@@ -246,7 +246,7 @@ dependencies:
   - pytorch=2.5.1=cuda126_mkl_py310_h67a8d91_317
   - pyyaml=6.0.2=py310h38315fa_2
   - qhull=2020.2=hc790b64_5
-  - qt6-main=6.8.3=h72a539a_1
+  - qt6-main
   - rav1e=0.6.6=h975169c_2
   - re2=2025.06.26=h3dd2b4f_0
   - regex=2024.11.6=py310ha8f682b_0
