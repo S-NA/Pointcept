@@ -62,9 +62,22 @@ setup(
         CUDAExtension(
             name="pointgroup_ops_cuda",
             sources=["src/bfs_cluster.cpp", "src/bfs_cluster_kernel.cu"],
-            extra_compile_args={"cxx": ["-g"], "nvcc": ["-O2"]},
+            extra_compile_args={
+                "cxx": ["-g"],
+                "nvcc": [
+                    "-O2",
+                    "-arch=sm_75",
+                    "-arch=sm_80",
+                    "-arch=sm_86",
+                    "-arch=sm_87",
+                    "-arch=sm_89",      # Ada Lovelace
+                    "-arch=sm_90",      # Hopper
+                    "-arch=sm_120",     # Future architecture
+                ],
+            },
         )
     ],
     include_dirs=[*include_dirs],
     cmdclass={"build_ext": BuildExtension},
 )
+

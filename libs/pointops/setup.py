@@ -24,7 +24,19 @@ sources = [
 cuda_extension = CUDAExtension(
     name="pointops._C",
     sources=sources,
-    extra_compile_args={"cxx": ["-g"], "nvcc": ["-O2"]},
+    extra_compile_args={
+        "cxx": ["-g"],
+        "nvcc": [
+            "-O2",
+            "-arch=sm_75",
+            "-arch=sm_80",
+            "-arch=sm_86",
+            "-arch=sm_87",
+            "-arch=sm_89",      # Ada Lovelace
+            "-arch=sm_90",      # Hopper
+            "-arch=sm_120",     # Future architecture
+        ],
+    },
 )
 
 setup(
