@@ -31,6 +31,7 @@ jobs:
           environment-file: environment_win64.yml
           pkgs-dirs: D:\conda_pkgs_dir
       - run: |
+          mamba env export
           mamba list
           mamba install conda-pack
           conda pack -n pointcept -o pointcept-env.tar.gz
